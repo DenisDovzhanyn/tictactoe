@@ -23,7 +23,7 @@ public class Main {
 
             // 9 is the max possible turns in tic tac toe
             for (int turn = 0; turn < 9; turn++) {
-                System.out.println("It is currently " + game.whosTurn() + "s turn");
+                System.out.println("It is currently " + game.getCurrentPlayerTurn() + "s turn");
 
                 game.getPlayerInput(input);
 
@@ -118,7 +118,7 @@ public class Main {
 
 
 
-    public String whosTurn(){
+    public String getCurrentPlayerTurn(){
         // checks to see whos turn it is
         if (isPlayer1 == true){
             return "Player one";
@@ -133,10 +133,10 @@ public class Main {
         for (int a = 0; a < board.length ; a++){
             if (board[a][0] == board[a][1] && board[a][1] == board[a][2] && board[a][0] != '-'){
                 if (board[a][0] == 'x'){
-                    someoneHasWon();
+                    onGameWin();
                     return true;
                 }else {
-                    someoneHasWon();
+                    onGameWin();
                     return true;
                 }
             }
@@ -146,10 +146,10 @@ public class Main {
         for (int b = 0; b < board.length ; b++){
             if (board[0][b] == board[1][b] && board[1][b] == board[2][b] && board[0][b] != '-'){
                 if (board[0][b] == 'x'){
-                    someoneHasWon();
+                    onGameWin();
                     return true;
                 } else {
-                    someoneHasWon();
+                    onGameWin();
                     return true;
                 }
             }
@@ -158,20 +158,20 @@ public class Main {
         // these two if statements check for diagonal winners
         if (board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[1][1] != '-') {
             if (board[0][0] == 'x') {
-                    someoneHasWon();
+                    onGameWin();
                     return true;
             } else {
-                    someoneHasWon();
+                    onGameWin();
                     return true;
             }
         }
 
         if (board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[0][2] != '-'){
             if (board[0][2] == 'x') {
-                someoneHasWon();
+                onGameWin();
                 return true;
             } else {
-                someoneHasWon();
+                onGameWin();
                 return true;
             }
         }
@@ -179,9 +179,9 @@ public class Main {
     }
 
     // if a player wins when checking the board, will print out winner and add to their score
-    public void someoneHasWon(){
-        System.out.println(whosTurn() + " wins!!!");
-        if (whosTurn().equals("Player one")){
+    public void onGameWin(){
+        System.out.println(getCurrentPlayerTurn() + " wins!!!");
+        if (getCurrentPlayerTurn().equals("Player one")){
             player1Score++;
         }else {
             player2Score++;
