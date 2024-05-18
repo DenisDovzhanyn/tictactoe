@@ -2,8 +2,7 @@ import java.util.Scanner;
 
 public class Main {
     char[][] board = new char[3][3];
-    int row;
-    int col;
+
     static boolean isPlayer1 = true;
     static int score;
 
@@ -12,76 +11,52 @@ public class Main {
         Scanner input = new Scanner(System.in);
         Main game = new Main();
 
+
         game.resetBoard();
         game.printBoard();
 
         for (int turn = 0; turn < 9 ; turn++){
             System.out.println("It is currently " + game.whoTurn());
-            System.out.println("Please choose a row from 1 to 3");
 
-            do {
-                // checks to see if input is out of bounds, if it is, will run while loop
-                game.setRow(input);
-                while (game.getRow() < 0 || game.getRow() > 2) {
-                    System.out.println("That is not between 1 and 3! Please input a correct row");
-                    game.setRow(input);
-                }
-
-                System.out.println("Now please choose a column");
-                game.setCol(input);
-                while (game.getCol() < 0 || game.getCol() > 2) {
-                    System.out.println("That is not between 1 and 3! Please input a correct column");
-                    game.setCol(input);
-                }
-
-                if (game.getBoard(game.getRow(), game.getCol()) != '-') {
-                    System.out.println("A player already has claimed that spot!");
-                } else {
-                    game.setBoard(game.getRow(), game.getCol());
-
-                }
-            } while (game.getBoard(game.getRow(), game.getCol()) != '-');
-
-            /*checks to see if the spot is already taken, if the spot is taken then the loop keeps running until an unclaimed spot is input
-            do {
-                if (game.getBoard(game.getRow(), game.getCol()) != '-') {
-                    System.out.println("A player already has claimed that spot!");
-                } else {
-                    game.setBoard(game.getRow(), game.getCol());
-
-                }
-            } while (game.getBoard(game.getRow(), game.getCol()) != '-');
-
-             */
+            game.getPlayerInput(input);
 
             game.printBoard();
-
-
             isPlayer1 = !isPlayer1;
-
-
-
-
-
         }
 
 
 
     }
 
-    public void setRow(Scanner scanner){
-        this.row = scanner.nextInt() - 1;
-    }
-    public int getRow(){
-        return row;
-    }
+    public void getPlayerInput(Scanner scanner){
+        int row;
+        int col;
 
-    public int getCol() {
-        return col;
-    }
+        do {
+            // checks to see if input is out of bounds, if it is, will run while loop
+            System.out.println("Please choose a row from 1 to 3");
+            row = scanner.nextInt() - 1;
+            while (row < 0 || row > 2) {
+                System.out.println("That is not between 1 and 3! Please input a correct row");
+               row = scanner.nextInt() - 1;
+            }
 
-    public void setCol(Scanner scanner) {
-        this.col = scanner.nextInt() - 1;
+            System.out.println("Now please choose a column from 1 to 3");
+            col = scanner.nextInt() - 1;
+            while (col < 0 || col > 2) {
+                System.out.println("That is not between 1 and 3! Please input a correct column");
+                col = scanner.nextInt() - 1;
+            }
+
+
+            // checks to see if a player has claimed the spot, otherwise will loop until un-unclaimed spot is chosen
+            if (getBoard(row, col) != '-') {
+                System.out.println("A player already has claimed that spot!");
+            }
+
+        } while (getBoard(row, col) != '-');
+
+        setBoard(row, col);
     }
 
 
@@ -98,8 +73,10 @@ public class Main {
 
     public void printBoard(){
         // prints the whole board by iterating through one row at a time, using a nested for loop
+        System.out.print("  1 2 3");
         for (int i = 0; i < board.length; i++) {
             System.out.println();
+            System.out.print((i + 1) + " ");
             for (int o = 0; o < board.length; o++) {
                 System.out.print(board[i][o] + " ");
             }
