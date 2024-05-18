@@ -5,6 +5,7 @@ public class Main {
 
     static boolean isPlayer1 = true;
 
+
     static int player1Score;
     static int player2Score;
 
@@ -12,30 +13,38 @@ public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         Main game = new Main();
+        boolean wantToPlay = true;
+
+        while(wantToPlay == true) {
 
 
-        game.resetBoard();
-        game.printBoard();
-
-        for (int turn = 0; turn < 9 ; turn++){
-            System.out.println("It is currently " + game.whoTurn());
-
-            game.getPlayerInput(input);
-
+            game.resetBoard();
             game.printBoard();
-            if (game.didYouWin() == true){
-                System.out.println("Player ones score: " + player1Score);
-                System.out.println("Player twos score: " + player2Score);
-                break;
-            }
-            isPlayer1 = !isPlayer1;
 
-            if (turn == 8 && game.didYouWin() == false){
-                System.out.println("No one wins!");
-            }
+            for (int turn = 0; turn < 9; turn++) {
+                System.out.println("It is currently " + game.whoTurn());
 
+                game.getPlayerInput(input);
+
+                game.printBoard();
+                if (game.didYouWin() == true) {
+                    System.out.println("Player ones score: " + player1Score);
+                    System.out.println("Player twos score: " + player2Score);
+                    break;
+                }
+                isPlayer1 = !isPlayer1;
+
+                if (turn == 8 && game.didYouWin() == false) {
+                    System.out.println("No one wins!");
+                }
+
+            }
+            System.out.println("If you would like to stop playing please input 1, otherwise input any other number to play another game");
+            int yesOrNo = input.nextInt();
+            if (yesOrNo == 1){
+                wantToPlay = false;
+            }
         }
-
     }
 
     public void getPlayerInput(Scanner scanner){
