@@ -16,7 +16,7 @@ public class Main {
         Main game = new Main();
         boolean wantToPlay = true;
 
-        while(wantToPlay == true) {
+        while(wantToPlay) {
 
 
             game.resetBoard();
@@ -29,7 +29,7 @@ public class Main {
                 game.getPlayerInput(input);
 
                 game.printBoard();
-                if (game.didYouWin() == true) {
+                if (game.didYouWin()) {
                     System.out.println("Player ones score: " + player1Score);
                     System.out.println("Player twos score: " + player2Score);
                     break;
@@ -130,7 +130,7 @@ public class Main {
 
     public void setBoard(int row , int col){
         // using user inputs to update the tictactoe board
-        if (isPlayer1 == true){
+        if (isPlayer1){
             board[row][col] = 'x';
         }else {
             board[row][col] = 'o';
@@ -142,7 +142,7 @@ public class Main {
 
     public String getCurrentPlayerTurn(){
         // checks to see whos turn it is
-        if (isPlayer1 == true){
+        if (isPlayer1){
             return "Player one";
         } else {
             return  "Player two";
