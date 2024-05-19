@@ -58,8 +58,9 @@ public class Main {
 
         do {
             // checks to see if input is out of bounds or if they did not enter the number correctly, if it is, will run while loop
-            System.out.println("Please choose a row from 1 to 3");
+
             while (repeat){
+                System.out.println("Please choose a row from 1 to 3");
             try {
                 row = scanner.nextInt() - 1;
                 while (row < 0 || row > 2) {
@@ -75,9 +76,8 @@ public class Main {
 
             repeat = true;
 
-            System.out.println("Now please choose a column from 1 to 3");
-
             while (repeat){
+                System.out.println("Now please choose a column from 1 to 3");
                 try {
                     col = scanner.nextInt() - 1;
                     while (col < 0 || col > 2) {
@@ -96,6 +96,7 @@ public class Main {
             if (board[row][col] != '-') {
                 System.out.println("A player already has claimed that spot!");
             }
+            repeat = true;
 
         } while (board[row][col] != '-');
 
