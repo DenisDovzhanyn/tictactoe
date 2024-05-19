@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -51,25 +52,45 @@ public class Main {
     }
 
     public void getPlayerInput(Scanner scanner){
-        int row;
-        int col;
+        int row = 0;
+        int col = 0;
+        boolean repeat = true;
 
         do {
-            // checks to see if input is out of bounds, if it is, will run while loop
+            // checks to see if input is out of bounds or if they did not enter the number correctly, if it is, will run while loop
             System.out.println("Please choose a row from 1 to 3");
-            row = scanner.nextInt() - 1;
-            while (row < 0 || row > 2) {
-                System.out.println("That is not between 1 and 3! Please input a correct row");
-               row = scanner.nextInt() - 1;
+            while (repeat){
+            try {
+                row = scanner.nextInt() - 1;
+                while (row < 0 || row > 2) {
+                    System.out.println("That is not between 1 and 3! Please input a correct row");
+                    row = scanner.nextInt() - 1;
+                }
+                repeat = false;
+            } catch (InputMismatchException letter){
+                System.out.println("Please enter your number using digits");
+                scanner.next();
+                }
             }
+
+            repeat = true;
 
             System.out.println("Now please choose a column from 1 to 3");
-            col = scanner.nextInt() - 1;
-            while (col < 0 || col > 2) {
-                System.out.println("That is not between 1 and 3! Please input a correct column");
-                col = scanner.nextInt() - 1;
-            }
 
+            while (repeat){
+                try {
+                    col = scanner.nextInt() - 1;
+                    while (col < 0 || col > 2) {
+                        System.out.println("That is not between 1 and 3! Please input a correct column");
+                        col = scanner.nextInt() - 1;
+
+                    }
+                    repeat = false;
+                } catch (InputMismatchException letter){
+                    System.out.println("Please enter your number using digits");
+                    scanner.next();
+                }
+            }
 
             // checks to see if a player has claimed the spot, otherwise will loop until un-unclaimed spot is chosen
             if (board[row][col] != '-') {
