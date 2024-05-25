@@ -13,16 +13,18 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import java.awt.*;
 import java.util.ArrayList;
 
 public class CoreGame implements Screen {
     final MyGdxGame game;
-   final Logic logic;
+    final Logic logic;
     OrthographicCamera camera;
     Texture grid;
     makeButton[][] buttons;
+    Stage stage;
 
 
 
@@ -34,30 +36,40 @@ public class CoreGame implements Screen {
         camera = new OrthographicCamera();
         camera.setToOrtho(false,500,500);
         grid = new Texture(Gdx.files.internal("grid.png"));
+        stage = new Stage(new ScreenViewport());
+        stage.clear();
+        Gdx.input.setInputProcessor(stage);
 
         // looping to instantiate a grid of buttons
 
-        int h = -163;
+        int h = 489;
         for (int i = 0; i < 3 ; i++){
-            h += 163;
+            h -= 163;
             int g = 0;
             int currentI = i;
             for (int k = 0; k < 3 ; k++){
                 int currentK = k;
                 buttons[i][k] = new makeButton("transparent/transparent.pack","ticSpace",g,h,160,155,i,k);
+                stage.addActor(buttons[i][k].button);
                 buttons[i][k].button.addListener(new InputListener(){
+                    /* if the button is touched, then it calls logic to see which player it is, then it calls the makebutton class
+                    to set style up to either an x or o depending on what logic returns, after that it clears the buttons listeners
+                    so that if the button has been clicked, it cannot be clicked again
+                     */
         public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
             if (logic.isIsPlayer1()) {
                 logic.setBoard(buttons[currentI][currentK].getRow(),buttons[currentI][currentK].getColumn());
                 buttons[currentI][currentK].setStyle("O");
                 buttons[currentI][currentK].button.clearListeners();
 
+
             }else {
                 logic.setBoard(buttons[currentI][currentK].getRow(), buttons[currentI][currentK].getColumn());
                 buttons[currentI][currentK].setStyle("x");
                 buttons[currentI][currentK].button.clearListeners();
+                
             }
-            return true;
+            return false;
         }
     });
                 g += 170;
@@ -77,15 +89,9 @@ public class CoreGame implements Screen {
         game.batch.begin();
         game.batch.draw(grid,0,0);
         game.batch.end();
-        for (int i = 0; i < buttons.length; i++){
-            for (int k = 0; k < buttons.length; k++){
-                buttons[i][k].stage.act();
-                buttons[i][k].stage.draw();
 
-            }
-
-
-        }
+        stage.act();
+        stage.draw();
 
 
 

@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class makeButton {
      Stage stage;
@@ -22,9 +23,8 @@ public class makeButton {
         atlas = new TextureAtlas(Gdx.files.local(pack));
         skin = new Skin();
         skin.addRegions(atlas);
-        stage = new Stage();
-        stage.clear();
-        Gdx.input.setInputProcessor(stage);
+
+
         this.row = row;
         this.column = column;
 
@@ -33,11 +33,10 @@ public class makeButton {
         button.setPosition(x,y);
         button.setWidth(width);
         button.setHeight(height);
-        stage.addActor(button);
+
     }
 
     public void dispose(){
-        stage.dispose();
         atlas.dispose();
         skin.dispose();
     }
