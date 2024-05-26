@@ -10,7 +10,7 @@ import java.awt.*;
 
 public class MyGdxGame extends Game {
 	SpriteBatch batch;
-	Font font;
+
 
 	
 	@Override

@@ -28,6 +28,61 @@ public class Logic {
         isPlayer1 = !isPlayer1;
         return isPlayer1;
     }
+    public boolean getPlayer(){
+        return isPlayer1;
+    }
+
+    public boolean didYouWin(){
+
+        // checks each row for a winner
+        for (int a = 0; a < board.length ; a++){
+            if (board[a][0] == board[a][1] && board[a][1] == board[a][2] && board[a][0] != '-'){
+                if (board[a][0] == 'x'){
+
+                    return true;
+                }else {
+
+                    return true;
+                }
+            }
+        }
+
+        // checks each column for a winner
+        for (int b = 0; b < board.length ; b++){
+            if (board[0][b] == board[1][b] && board[1][b] == board[2][b] && board[0][b] != '-'){
+                if (board[0][b] == 'x'){
+
+                    return true;
+                } else {
+
+                    return true;
+                }
+            }
+        }
+
+        // these two if statements check for diagonal winners
+        if (board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[1][1] != '-') {
+            if (board[0][0] == 'x') {
+
+                return true;
+            } else {
+
+                return true;
+            }
+        }
+
+        if (board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[0][2] != '-'){
+            if (board[0][2] == 'x') {
+                ;
+                return true;
+            } else {
+
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 
 
