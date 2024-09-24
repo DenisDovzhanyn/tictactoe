@@ -21,4 +21,4 @@ This is a simple Tic-Tac-Toe game built using the LibGDX framework. The game fea
 
 ## Dependencies
 
-- **LibGDX**: The game is developed using the LibGDX framework.
+- **LibGDX**: The game is developed using the LibGDX framework..
